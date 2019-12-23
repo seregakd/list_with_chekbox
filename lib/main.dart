@@ -22,6 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _counter = 0;
+  List<String> _list = ["0", "1", "2"];
 
   void _incrementCounter() {
     setState(() {
@@ -33,32 +34,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: //Text('List'),
-        Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('chBox'),
-              Text('Select all'),
-              Text('all count'),
-            ]
-        ),
+        title: _buildTitle()
       ),
-      body: Column(
-//          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('chBox'),
-                  Text('Select all'),
-                  Text('all count'),
-                ]
-            ),
-     //       new mList(),
-          ]
-      ),
+
+      body: _buildList(),
+
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
@@ -66,4 +46,42 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Widget _buildTitle() {
+    return Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('chBox'),
+          Text('Select all'),
+          Text('all count'),
+        ]
+    );
+  }
+
+  Widget _buildList() {
+    return new ListView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemCount: _list.length * 2 - 1,
+        itemBuilder: (context, i){
+          if (i.isOdd) {
+            return Divider();
+          }
+          final int index = i ~/ 2;
+          return _buildItem(_list[index]);
+        }
+    );
+  }
+
+  Widget _buildItem(String list) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+            title: Text(list)
+        ),
+
+      ],
+    );
+  }
+
 }
