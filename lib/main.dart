@@ -21,10 +21,9 @@ class _HomePageState extends State<HomePage> {
   int _counter = 0;
   List<String> _list = [];
 
-  _addItem() {
+  void _addItem() {
     setState(() {
       _list.add((_counter++).toString());
-//      _buildList();
     });
   }
 
@@ -38,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       body: _buildList(),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: _addItem(),
+        onPressed: _addItem,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
