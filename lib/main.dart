@@ -105,7 +105,7 @@ class ItemList extends StatefulWidget {
 
 class _ItemListState extends State<ItemList>{
   final String itemText;
-  _ItemListState(@required this.itemText);
+  _ItemListState(this.itemText);
 
   //widget.
 
