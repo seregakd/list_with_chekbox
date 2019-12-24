@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:list_with_chekbox/ItemList.dart';
 
 void main() => runApp(ListApp());
 
@@ -75,51 +76,5 @@ class _HomePageState extends State<HomePage> {
 
         }
     );
-  }
-
-  /*
-  Widget _buildItem(String list) {
-    return Column(
-//      children: [
-      children: <Widget>[
-        ListTile(
-          leading:  Checkbox(value: _valueTitleCb, onChanged: _valueTitleCbChanged),
-          title: Text(list),
-          trailing: Icon(Icons.more_vert),
-        ),
-      ],
-    );
-  }
-*/
-}
-
-
-class ItemList extends StatefulWidget {
-  final String itemText;
-
-  ItemList(this.itemText, {Key key}) : assert(itemText != null), super(key: key);
-
-  @override
-  _ItemListState createState() => _ItemListState(itemText);
-}
-
-class _ItemListState extends State<ItemList>{
-  final String itemText;
-  _ItemListState(this.itemText);
-
-  //widget.
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-//          leading:  Checkbox(value: _valueTitleCb, onChanged: _valueTitleCbChanged),
-          title: Text(itemText),
-          trailing: Icon(Icons.more_vert),
-        ),
-      ],
-    );
-
   }
 }
