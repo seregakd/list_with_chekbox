@@ -70,11 +70,14 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         itemCount: _list.length,
         itemBuilder: (context, i){
-            return _buildItem(_list[i]);
+//            return _buildItem(_list[i]);
+        return ItemList(_list[i]);
+
         }
     );
   }
 
+  /*
   Widget _buildItem(String list) {
     return Column(
 //      children: [
@@ -87,17 +90,36 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
+*/
 }
+
 
 class ItemList extends StatefulWidget {
+  final String itemText;
+
+  ItemList(this.itemText, {Key key}) : assert(itemText != null), super(key: key);
+
   @override
-  _ItemListState createState() => _ItemListState();
+  _ItemListState createState() => _ItemListState(itemText);
 }
 
-class _ItemListState extends State<ItemList> {
+class _ItemListState extends State<ItemList>{
+  final String itemText;
+  _ItemListState(@required this.itemText);
+
+  //widget.
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+//          leading:  Checkbox(value: _valueTitleCb, onChanged: _valueTitleCbChanged),
+          title: Text(itemText),
+          trailing: Icon(Icons.more_vert),
+        ),
+      ],
+    );
 
   }
 }
