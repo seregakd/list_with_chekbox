@@ -20,10 +20,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _counter = 0;
   List<String> _list = [];
+  bool _valueTitleCb = false;
 
   void _addItem() {
     setState(() {
       _list.add((_counter++).toString());
+    });
+  }
+
+  void _valueTitleCbChanged(bool value) {
+    setState(() {
+//      _valueTitleCb = !_valueTitleCb;
+      _valueTitleCb = value;
     });
   }
 
@@ -46,12 +54,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildTitle() {
     return Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('chBox'),
+          Checkbox(value: _valueTitleCb, onChanged: _valueTitleCbChanged),
           Text('Select all'),
-          Text('all count'),
+          Text('count'),
         ]
     );
   }
