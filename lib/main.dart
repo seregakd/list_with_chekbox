@@ -30,7 +30,6 @@ class _HomePageState extends State<HomePage> {
 
   void _valueTitleCbChanged(bool value) {
     setState(() {
-//      _valueTitleCb = !_valueTitleCb;
       _valueTitleCb = value;
     });
   }
@@ -57,9 +56,11 @@ class _HomePageState extends State<HomePage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Checkbox(value: _valueTitleCb, onChanged: _valueTitleCbChanged),
-          Text('Select all'),
-          Text('count'),
+          Row(children: [
+            Checkbox(value: _valueTitleCb, onChanged: _valueTitleCbChanged),
+            Text('Select all'),
+          ]),
+          Text('10'),
         ]
     );
   }
