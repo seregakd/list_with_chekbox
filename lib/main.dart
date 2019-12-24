@@ -77,14 +77,27 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildItem(String list) {
     return Column(
+//      children: [
       children: <Widget>[
         ListTile(
-            title: Text(list)
+          leading:  Checkbox(value: _valueTitleCb, onChanged: _valueTitleCbChanged),
+          title: Text(list),
+          trailing: Icon(Icons.more_vert),
         ),
-
       ],
     );
   }
+}
 
+class ItemList extends StatefulWidget {
+  @override
+  _ItemListState createState() => _ItemListState();
+}
 
+class _ItemListState extends State<ItemList> {
+
+  @override
+  Widget build(BuildContext context) {
+
+  }
 }
