@@ -52,13 +52,15 @@ class _ItemListState extends State<ItemList>{
           FloatingActionButton(
             onPressed: () => _addCount(false),
             child: const Icon(Icons.remove),
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.lightBlueAccent,
+            mini: true,
           ),
-          Text(_counter.toString()),
+          Text(_counter.toString(), style: Theme.of(context).textTheme.title),
           FloatingActionButton(
             onPressed: () => _addCount(true),
             child: const Icon(Icons.add),
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.lightBlueAccent,
+            mini: true,
           ),
     ]);
   }

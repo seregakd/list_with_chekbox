@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _counter = 0;
+  int _allCount = 0;
   List<String> _list = [];
   bool _valueTitleCb = false;
 
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             Checkbox(value: _valueTitleCb, onChanged: _valueTitleCbChanged),
             Text('Select all'),
           ]),
-          Text('10'),
+          Text(_allCount.toString()),
         ]
     );
   }
