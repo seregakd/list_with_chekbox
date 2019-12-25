@@ -10,22 +10,58 @@ class ItemList extends StatefulWidget {
 }
 
 class _ItemListState extends State<ItemList>{
-  final String itemText;
-  _ItemListState(this.itemText);
+  final String _itemText;
+  bool _valueCb = false;
+  int _counter = 0;
 
-  //widget.
+  _ItemListState(this._itemText);
+
+  void _valueCbChanged(bool value) {
+    setState(() {
+      _valueCb = value;
+    });
+  }
+
+  void _addCount(bool add) {
+    setState(() {
+      if (add) {
+        _counter++;
+      } else {
+        _counter--;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        ListTile(
-//          leading:  Checkbox(value: _valueTitleCb, onChanged: _valueTitleCbChanged),
-          title: Text(itemText),
-          trailing: Icon(Icons.more_vert),
-        ),
+        Checkbox(value: _valueCb, onChanged: _valueCbChanged),
+        Text(_itemText),
+        _buildCount(),
       ],
     );
-
   }
+
+  Widget _buildCount() {
+    return Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          FloatingActionButton(
+            onPressed: () => _addCount(false),
+            child: const Icon(Icons.remove),
+            backgroundColor: Colors.green,
+          ),
+          Text(_counter.toString()),
+          FloatingActionButton(
+            onPressed: () => _addCount(true),
+            child: const Icon(Icons.add),
+            backgroundColor: Colors.green,
+          ),
+    ]);
+  }
+
+
 }
