@@ -2,19 +2,29 @@ import 'package:flutter/material.dart';
 
 class ItemList extends StatefulWidget {
   final String itemText;
+  final bool valueTitleCb;
 
-  ItemList(this.itemText, {Key key}) : assert(itemText != null), super(key: key);
+  ItemList(this.itemText, this.valueTitleCb, {Key key}) : assert(itemText != null), super(key: key);
 
   @override
-  _ItemListState createState() => _ItemListState(itemText);
+  _ItemListState createState() => _ItemListState(itemText, valueTitleCb);
 }
 
 class _ItemListState extends State<ItemList>{
   final String _itemText;
-  bool _valueCb = false;
+  final bool _valueTitleCb;
+
+  bool _valueCb;
   int _counter = 0;
 
-  _ItemListState(this._itemText);
+  _ItemListState(this._itemText, this._valueTitleCb);
+
+  @override
+  void initState() {
+    _valueCb = _valueTitleCb;
+//    setState(() {});
+    super.initState();
+  }
 
   void _valueCbChanged(bool value) {
     setState(() {

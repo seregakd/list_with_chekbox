@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
         itemCount: _list.length,
         itemBuilder: (context, i){
 //            return _buildItem(_list[i]);
-        return ItemList(_list[i]);
+        return ItemList(_list[i], _valueTitleCb);
 
         }
     );
