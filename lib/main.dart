@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:list_with_chekbox/ItemList.dart';
+import 'package:list_with_chekbox/model/CounterModel.dart';
 
 void main() => runApp(ListApp());
 
 class ListApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider(
+        create: (context) => CounterModel(),
+        child: MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new HomePage(),
+    ),
     );
   }
 }
