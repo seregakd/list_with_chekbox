@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:list_with_chekbox/ItemList.dart';
-import 'package:list_with_chekbox/model/CounterModel.dart';
 
 void main() => runApp(ListApp());
 
@@ -35,6 +33,12 @@ class _HomePageState extends State<HomePage> {
   void _valueTitleCbChanged(bool value) {
     setState(() {
       _valueTitleCb = value;
+    });
+  }
+
+  void refresh(dynamic childCount) {
+    setState(() {
+      _allCount += childCount;
     });
   }
 
@@ -74,9 +78,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         itemCount: _list.length,
         itemBuilder: (context, i){
-//            return _buildItem(_list[i]);
-        return ItemList(_list[i], _valueTitleCb);
-
+        return ItemList(_list[i], _valueTitleCb, notifyParent: refresh);
         }
     );
   }

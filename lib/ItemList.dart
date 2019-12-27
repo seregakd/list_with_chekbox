@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class ItemList extends StatefulWidget {
   final String itemText;
   final bool valueTitleCb;
+  final Function notifyParent;
 
-  ItemList(this.itemText, this.valueTitleCb, {Key key}) : assert(itemText != null), super(key: key);
+  ItemList(this.itemText, this.valueTitleCb, {Key key, @required this.notifyParent}) : assert(itemText != null), super(key: key);
 
   @override
   _ItemListState createState() => _ItemListState(itemText, valueTitleCb);
@@ -36,9 +38,16 @@ class _ItemListState extends State<ItemList>{
     setState(() {
       if (add) {
         _counter++;
+        if (_valueCb) {
+          widget.notifyParent(1);
+        }
       } else {
         _counter--;
+        if (_valueCb) {
+          widget.notifyParent(-1);
+        }
       }
+
     });
   }
 
