@@ -8,12 +8,9 @@ void main() => runApp(ListApp());
 class ListApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => CounterModel(),
-        child: MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: new HomePage(),
-    ),
     );
   }
 }
