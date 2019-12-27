@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         itemCount: _list.length,
         itemBuilder: (context, i){
-        return ItemList(_list[i], _valueTitleCb, parentCount: refreshAllCount, parentCb: refreshCb);
+        return ItemList(_list[i], valueTitleCb: _valueTitleCb, parentCount: refreshAllCount, parentCb: refreshCb);
         }
     );
   }

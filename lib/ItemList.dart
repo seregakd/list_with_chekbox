@@ -7,7 +7,7 @@ class ItemList extends StatefulWidget {
   final Function parentCount;
   final Function parentCb;
 
-  ItemList(this.itemText, this.valueTitleCb, {Key key,
+  ItemList(this.itemText, {Key key, this.valueTitleCb,
     @required this.parentCount, @required this.parentCb}) : assert(itemText != null), super(key: key);
 
   @override
@@ -16,19 +16,11 @@ class ItemList extends StatefulWidget {
 
 class _ItemListState extends State<ItemList>{
   final String _itemText;
-  final bool _valueTitleCb;
 
   bool _valueCb;
   int _counter = 0;
 
-  _ItemListState(this._itemText, this._valueTitleCb);
-
-  @override
-  void initState() {
-    _valueCb = _valueTitleCb;
-//    setState(() {});
-    super.initState();
-  }
+  _ItemListState(this._itemText, this._valueCb);
 
   void _valueCbChanged(bool value) {
     setState(() {
