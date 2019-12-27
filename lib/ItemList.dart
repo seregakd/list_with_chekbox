@@ -4,9 +4,11 @@ import 'package:flutter/foundation.dart';
 class ItemList extends StatefulWidget {
   final String itemText;
   final bool valueTitleCb;
-  final Function notifyParent;
+  final Function parentCount;
+  final Function parentCb;
 
-  ItemList(this.itemText, this.valueTitleCb, {Key key, @required this.notifyParent}) : assert(itemText != null), super(key: key);
+  ItemList(this.itemText, this.valueTitleCb, {Key key,
+    @required this.parentCount, @required this.parentCb}) : assert(itemText != null), super(key: key);
 
   @override
   _ItemListState createState() => _ItemListState(itemText, valueTitleCb);
@@ -31,6 +33,11 @@ class _ItemListState extends State<ItemList>{
   void _valueCbChanged(bool value) {
     setState(() {
       _valueCb = value;
+      if (_valueCb) {
+        widget.parentCb(_counter);
+      } else {
+        widget.parentCb(-_counter);
+      }
     });
   }
 
@@ -39,12 +46,12 @@ class _ItemListState extends State<ItemList>{
       if (add) {
         _counter++;
         if (_valueCb) {
-          widget.notifyParent(1);
+          widget.parentCount(1);
         }
       } else {
         _counter--;
         if (_valueCb) {
-          widget.notifyParent(-1);
+          widget.parentCount(-1);
         }
       }
 

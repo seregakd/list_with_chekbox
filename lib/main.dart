@@ -36,7 +36,13 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void refresh(dynamic childCount) {
+  void refreshAllCount(dynamic changeChildCount) {
+    setState(() {
+      _allCount += changeChildCount;
+    });
+  }
+
+  void refreshCb(dynamic childCount) {
     setState(() {
       _allCount += childCount;
     });
@@ -78,7 +84,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         itemCount: _list.length,
         itemBuilder: (context, i){
-        return ItemList(_list[i], _valueTitleCb, notifyParent: refresh);
+        return ItemList(_list[i], _valueTitleCb, parentCount: refreshAllCount, parentCb: refreshCb);
         }
     );
   }
