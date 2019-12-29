@@ -7,7 +7,7 @@ class ItemList extends StatefulWidget {
   final Function parentCount;
   final Function parentCb;
 
-  ItemList(this.itemText, {Key key, this.valueTitleCb,
+  ItemList( {Key key, this.itemText, this.valueTitleCb,
     @required this.parentCount, @required this.parentCb}) : assert(itemText != null), super(key: key);
 
   @override
@@ -45,12 +45,6 @@ class _ItemListState extends State<ItemList>{
           widget.parentCount(-1);
         }
       }
-    });
-  }
-
-  void selectCb() {
-    setState(() {
-      _valueCb = true;
     });
   }
 

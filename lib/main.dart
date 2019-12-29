@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:list_with_chekbox/ItemList.dart';
+import 'dart:developer' as developer;
 
 void main() => runApp(ListApp());
 
@@ -22,21 +23,24 @@ class _HomePageState extends State<HomePage> {
   int _counter = 0;
   int _allCount = 0;
   List<String> _list = [];
+  List<bool> _list2 = [];
   bool _valueTitleCb = false;
 
   void _addItem() {
     setState(() {
       _list.add("Item " + (_counter++).toString());
+      _list2.add(false);
     });
   }
 
   void _valueTitleCbChanged(bool value) {
-    setState(() {
-      for (int i = 0; i < _list.length; i++){
-
-      }
       _valueTitleCb = value;
-    });
+      for (int i = 0; i < _list2.length; i++){
+        setState(() {
+          _list2[i] = value;
+        });
+//        developer.log('data:' + _list2[i].toString() , name: 'app.log');
+      }
   }
 
   void refreshAllCount(dynamic changeChildCount) {
@@ -87,7 +91,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         itemCount: _list.length,
         itemBuilder: (context, i){
-        return ItemList(_list[i], valueTitleCb: _valueTitleCb,
+        return ItemList(itemText: _list[i], valueTitleCb: _list2[i],
             parentCount: refreshAllCount, parentCb: refreshCb);
         }
     );
