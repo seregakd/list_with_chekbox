@@ -23,19 +23,20 @@ class _HomePageState extends State<HomePage> {
   int _allCount = 0;
   List<String> _list = [];
   bool _valueTitleCb = false;
-  final GlobalKey<_ItemListState> _key = GlobalKey();
 
   void _addItem() {
     setState(() {
-      _list.add((_counter++).toString());
+      _list.add("Item " + (_counter++).toString());
     });
   }
 
   void _valueTitleCbChanged(bool value) {
     setState(() {
+      for (int i = 0; i < _list.length; i++){
+
+      }
       _valueTitleCb = value;
     });
-    _key.currentState.selectCb();
   }
 
   void refreshAllCount(dynamic changeChildCount) {
@@ -86,7 +87,8 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         itemCount: _list.length,
         itemBuilder: (context, i){
-        return ItemList(_list[i], key: _key, valueTitleCb: _valueTitleCb, parentCount: refreshAllCount, parentCb: refreshCb);
+        return ItemList(_list[i], valueTitleCb: _valueTitleCb,
+            parentCount: refreshAllCount, parentCb: refreshCb);
         }
     );
   }

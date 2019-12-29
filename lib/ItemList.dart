@@ -16,7 +16,6 @@ class ItemList extends StatefulWidget {
 
 class _ItemListState extends State<ItemList>{
   final String _itemText;
-
   bool _valueCb;
   int _counter = 0;
 
