@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:list_with_chekbox/ItemList.dart';
-import 'dart:developer' as developer;
 
 void main() => runApp(ListApp());
 
@@ -23,13 +22,11 @@ class _HomePageState extends State<HomePage> {
   int _counter = 0;
   int _allCount = 0;
   List<String> _list = [];
-//  List<bool> _list2 = [];
   bool _valueTitleCb = false;
 
   void _addItem() {
     setState(() {
       _list.add("Item " + (_counter++).toString());
-//      _list2.add(false);
     });
   }
 
@@ -37,15 +34,6 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _valueTitleCb = value;
       });
-
-      /*
-      for (int i = 0; i < _list2.length; i++){
-        setState(() {
-          _list2[i] = value;
-        });
-      */
-//        developer.log('data:' + _list2[i].toString() , name: 'app.log');
-   //   }
   }
 
   void refreshAllCount(dynamic changeChildCount) {
@@ -67,9 +55,7 @@ class _HomePageState extends State<HomePage> {
         title: _buildTitle()
       ),
 
-//      body: _buildList(),
-      body: newList(list: _list, valueTitleCb: _valueTitleCb,
-          parentCount: refreshAllCount, parentCb: refreshCb),
+      body: _buildList(),
 
       floatingActionButton: FloatingActionButton(
         onPressed: _addItem,
@@ -105,40 +91,5 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class newList extends StatefulWidget {
-  final List<String> list;
-  final bool valueTitleCb;
-  final Function parentCount;
-  final Function parentCb;
-
-  newList( {Key key, this.list, this.valueTitleCb,
-    @required this.parentCount, @required this.parentCb}) : assert(list != null), super(key: key);
-
-  @override
-  _newListState createState() => _newListState(list, valueTitleCb, parentCount, parentCb);
-}
-
-class _newListState extends State<newList>{
-  List<String> _list;
-  bool _valueCb;
-  Function parentCount;
-  Function parentCb;
-
-  _newListState(this._list, this._valueCb, this.parentCount, this.parentCb);
-
-  @override
-  Widget build(BuildContext context) {
-    return new ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemCount: _list.length,
-        itemBuilder: (context, i){
-          return ItemList(itemText: _list[i], valueTitleCb: _valueCb,
-              parentCount: parentCount, parentCb: parentCb);
-        }
-    );
-  }
-
-
-}
 
 
