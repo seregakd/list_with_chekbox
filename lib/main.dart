@@ -67,7 +67,9 @@ class _HomePageState extends State<HomePage> {
         title: _buildTitle()
       ),
 
-      body: _buildList(),
+//      body: _buildList(),
+      body: newList(list: _list, valueTitleCb: _valueTitleCb,
+          parentCount: refreshAllCount, parentCb: refreshCb),
 
       floatingActionButton: FloatingActionButton(
         onPressed: _addItem,
@@ -102,4 +104,41 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+class newList extends StatefulWidget {
+  final List<String> list;
+  final bool valueTitleCb;
+  final Function parentCount;
+  final Function parentCb;
+
+  newList( {Key key, this.list, this.valueTitleCb,
+    @required this.parentCount, @required this.parentCb}) : assert(list != null), super(key: key);
+
+  @override
+  _newListState createState() => _newListState(list, valueTitleCb, parentCount, parentCb);
+}
+
+class _newListState extends State<newList>{
+  List<String> _list;
+  bool _valueCb;
+  Function parentCount;
+  Function parentCb;
+
+  _newListState(this._list, this._valueCb, this.parentCount, this.parentCb);
+
+  @override
+  Widget build(BuildContext context) {
+    return new ListView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemCount: _list.length,
+        itemBuilder: (context, i){
+          return ItemList(itemText: _list[i], valueTitleCb: _valueCb,
+              parentCount: parentCount, parentCb: parentCb);
+        }
+    );
+  }
+
+
+}
+
 
