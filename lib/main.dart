@@ -14,6 +14,8 @@ class ListApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -23,17 +25,29 @@ class _HomePageState extends State<HomePage> {
   int _allCount = 0;
   List<String> _list = [];
   bool _valueTitleCb = false;
+  List widgets = <Widget>[];
 
   void _addItem() {
     setState(() {
       _list.add("Item " + (_counter++).toString());
+
+    widgets.add(ItemList(itemText: (_counter++).toString(), valueTitleCb: _valueTitleCb,
+        parentCount: refreshAllCount, parentCb: refreshCb));
     });
   }
 
   void _valueTitleCbChanged(bool value) {
+    setState(() {
+      _valueTitleCb = value;
+    });
+
+    for (int i = 0; i < widgets.length; i++){
       setState(() {
-        _valueTitleCb = value;
+        widgets[i] = ItemList(itemText: (_counter++).toString(), valueTitleCb: _valueTitleCb,
+            parentCount: refreshAllCount, parentCb: refreshCb);
       });
+    }
+
   }
 
   void refreshAllCount(dynamic changeChildCount) {
@@ -78,14 +92,24 @@ class _HomePageState extends State<HomePage> {
         ]
     );
   }
-
+/*
   Widget _buildList() {
     return new ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: _list.length,
         itemBuilder: (context, i){
-        return ItemList(itemText: _list[i], valueTitleCb: _valueTitleCb,
-            parentCount: refreshAllCount, parentCb: refreshCb);
+          return ItemList(itemText: _list[i], valueTitleCb: _valueTitleCb,
+              parentCount: refreshAllCount, parentCb: refreshCb);
+        }
+    );
+  }
+*/
+  Widget _buildList() {
+    return new ListView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemCount: widgets.length,
+        itemBuilder: (context, i){
+          return widgets[i];
         }
     );
   }

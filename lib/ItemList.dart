@@ -11,7 +11,7 @@ class ItemList extends StatefulWidget {
     @required this.parentCount, @required this.parentCb}) : assert(itemText != null), super(key: key);
 
   @override
-  _ItemListState createState() => _ItemListState(itemText, valueTitleCb);
+  _ItemListState createState() => _ItemListState(itemText);
 }
 
 class _ItemListState extends State<ItemList>{
@@ -19,7 +19,15 @@ class _ItemListState extends State<ItemList>{
   bool _valueCb;
   int _counter = 0;
 
-  _ItemListState(this._itemText, this._valueCb);
+  _ItemListState(this._itemText);
+
+  @override
+  void initState() {
+//    setState(() {});
+//  print(_valueCb.toString());
+    _valueCb = this.widget.valueTitleCb;
+    super.initState();
+  }
 
   void _valueCbChanged(bool value) {
     setState(() {
