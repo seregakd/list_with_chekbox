@@ -1,59 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'ItemModel.dart';
 
-class ItemList extends StatefulWidget {
-  final String itemText;
-  final bool valueTitleCb;
+class ItemList extends StatelessWidget  {
+//  final String itemText;
+//  final bool valueCb;
+//  final int counter;
+  final ItemModel itemModel;
+  final int listItemNumber;
   final Function parentCount;
   final Function parentCb;
 
-  ItemList( {Key key, this.itemText, this.valueTitleCb,
-    @required this.parentCount, @required this.parentCb}) : assert(itemText != null), super(key: key);
+//  ItemList( {Key key, this.itemText, this.valueCb, this.counter,
+//    @required this.parentCount, @required this.parentCb}) :  super(key: key);
 
-  @override
-  _ItemListState createState() => _ItemListState(itemText);
-}
-
-class _ItemListState extends State<ItemList>{
-  final String _itemText;
-  bool _valueCb;
-  int _counter = 0;
-
-  _ItemListState(this._itemText);
-
-  @override
-  void initState() {
-//    setState(() {});
-//  print(_valueCb.toString());
-    _valueCb = this.widget.valueTitleCb;
-    super.initState();
-  }
+  ItemList({Key key, this.itemModel, this.listItemNumber,
+    @required this.parentCount, @required this.parentCb}) :  super(key: key);
 
   void _valueCbChanged(bool value) {
-    setState(() {
-      _valueCb = value;
-      if (_valueCb) {
-        widget.parentCb(_counter);
-      } else {
-        widget.parentCb(-_counter);
-      }
-    });
+    parentCb(listItemNumber, value);
   }
 
-  void _addCount(bool add) {
-    setState(() {
-      if (add) {
-        _counter++;
-        if (_valueCb) {
-          widget.parentCount(1);
-        }
-      } else {
-        _counter--;
-        if (_valueCb) {
-          widget.parentCount(-1);
-        }
-      }
-    });
+  void _addCount(bool value) {
+    parentCount(listItemNumber, value);
   }
 
   @override
@@ -62,8 +31,8 @@ class _ItemListState extends State<ItemList>{
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Checkbox(value: _valueCb, onChanged: _valueCbChanged),
-        Text(_itemText),
+        Checkbox(value: itemModel.valueCb, onChanged: _valueCbChanged),
+        Text(itemModel.itemText),
         _buildCount(),
       ],
     );
@@ -79,7 +48,7 @@ class _ItemListState extends State<ItemList>{
             backgroundColor: Colors.lightBlueAccent,
             mini: true,
           ),
-          Text(_counter.toString(), style: Theme.of(context).textTheme.title),
+          Text(itemModel.counter.toString()),  //, style: Theme.of(context).textTheme.title),
           FloatingActionButton(
             onPressed: () => _addCount(true),
             child: const Icon(Icons.add),
@@ -88,6 +57,5 @@ class _ItemListState extends State<ItemList>{
           ),
     ]);
   }
-
 
 }

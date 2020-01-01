@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:list_with_chekbox/ItemList.dart';
+import 'ItemList.dart';
+import 'ItemModel.dart';
 
 void main() => runApp(ListApp());
 
@@ -21,18 +22,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
+  int _nameCounter = 0;
   int _allCount = 0;
-  List<String> _list = [];
+//  int counter = 0;
+  int listItemNumber = 0;
+//  List<String> _list = [];
   bool _valueTitleCb = false;
   List widgets = <Widget>[];
+  List models = <ItemModel>[];
+  ItemModel itemModel;
 
   void _addItem() {
     setState(() {
-      _list.add("Item " + (_counter++).toString());
+      models.add(ItemModel(valueCb: _valueTitleCb,
+          itemText: "Item " + (_nameCounter++).toString(), counter: 0));
 
-    widgets.add(ItemList(itemText: (_counter++).toString(), valueTitleCb: _valueTitleCb,
-        parentCount: refreshAllCount, parentCb: refreshCb));
+      widgets.add(ItemList(itemModel: models[models.length-1], listItemNumber: models.length-1,
+          parentCount: refreshCount, parentCb: refreshCb));
     });
   }
 
@@ -41,24 +47,34 @@ class _HomePageState extends State<HomePage> {
       _valueTitleCb = value;
     });
 
-    for (int i = 0; i < widgets.length; i++){
+    for (int i = 0; i < models.length; i++){
+      itemModel = models[i];
+      itemModel.valueCb = value;
+
       setState(() {
-        widgets[i] = ItemList(itemText: (_counter++).toString(), valueTitleCb: _valueTitleCb,
-            parentCount: refreshAllCount, parentCb: refreshCb);
+        models[i] = itemModel;
       });
+
+      print("i = " + i.toString() + "itemText = " + itemModel.itemText
+          + " valueTitleCb = " + itemModel.valueCb.toString()
+          + " counter = " + itemModel.counter.toString());
     }
 
   }
 
-  void refreshAllCount(dynamic changeChildCount) {
+  void refreshCount(int listItemNumber, bool childAdd) {
+    this.listItemNumber = listItemNumber;
+
     setState(() {
-      _allCount += changeChildCount;
+///      _allCount += add;
     });
   }
 
-  void refreshCb(dynamic childCount) {
+  void refreshCb(int listItemNumber, bool childCount) {
+    this.listItemNumber = listItemNumber;
+
     setState(() {
-      _allCount += childCount;
+//      _allCount += childCount;
     });
   }
 
