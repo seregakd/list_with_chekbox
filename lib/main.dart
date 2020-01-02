@@ -49,12 +49,14 @@ class _HomePageState extends State<HomePage> {
 
     for (int i = 0; i < models.length; i++){
       itemModel = models[i];
-      itemModel.valueCb = value;
 
-      setState(() {
-        models[i] = itemModel;
-      });
+      if (itemModel.valueCb != value) {
+        itemModel.valueCb = value;
 
+        setState(() {
+          models[i] = itemModel;
+        });
+      }
       print("i = " + i.toString() + "itemText = " + itemModel.itemText
           + " valueTitleCb = " + itemModel.valueCb.toString()
           + " counter = " + itemModel.counter.toString());
@@ -62,20 +64,47 @@ class _HomePageState extends State<HomePage> {
 
   }
 
-  void refreshCount(int listItemNumber, bool childAdd) {
+  void refreshCount(int i, bool childIncrement) {
     this.listItemNumber = listItemNumber;
+    itemModel = models[i];
+
+    if (childIncrement) {
+      itemModel.counter++;
+
+      setState(() {
+        _allCount++;
+      });
+    } else {
+      itemModel.counter--;
+
+      setState(() {
+        _allCount--;
+      });
+    }
 
     setState(() {
-///      _allCount += add;
+      models[i] = itemModel;
     });
   }
 
-  void refreshCb(int listItemNumber, bool childCount) {
-    this.listItemNumber = listItemNumber;
+  void refreshCb(int i, bool childCb) {
+    this.listItemNumber = i;
+    itemModel = models[i];
+    itemModel.valueCb = childCb;
 
     setState(() {
-//      _allCount += childCount;
+      models[i] = itemModel;
     });
+
+    if (childCb) {
+      setState(() {
+        _allCount += itemModel.counter;
+      });
+    } else {
+      setState(() {
+        _allCount -= itemModel.counter;
+      });
+    }
   }
 
   @override

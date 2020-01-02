@@ -21,7 +21,7 @@ class ItemList extends StatelessWidget  {
     parentCb(listItemNumber, value);
   }
 
-  void _addCount(bool value) {
+  void _incrementCounter(bool value) {
     parentCount(listItemNumber, value);
   }
 
@@ -43,14 +43,14 @@ class ItemList extends StatelessWidget  {
         mainAxisSize: MainAxisSize.max,
         children: [
           FloatingActionButton(
-            onPressed: () => _addCount(false),
+            onPressed: () => _incrementCounter(false),
             child: const Icon(Icons.remove),
             backgroundColor: Colors.lightBlueAccent,
             mini: true,
           ),
           Text(itemModel.counter.toString()),  //, style: Theme.of(context).textTheme.title),
           FloatingActionButton(
-            onPressed: () => _addCount(true),
+            onPressed: () => _incrementCounter(true),
             child: const Icon(Icons.add),
             backgroundColor: Colors.lightBlueAccent,
             mini: true,
