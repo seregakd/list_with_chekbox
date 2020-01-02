@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
       _valueTitleCb = value;
     });
 
+    _allCount = 0;
     for (int i = 0; i < models.length; i++){
       itemModel = models[i];
 
@@ -59,6 +60,11 @@ class _HomePageState extends State<HomePage> {
               parentCount: refreshCount, parentCb: refreshCb);
         });
       }
+
+      if (itemModel.valueCb) {
+        _allCount += itemModel.counter;
+      }
+
       print("i=" + i.toString() + ", Text=" + itemModel.itemText
           + ", valueTitleCb=" + itemModel.valueCb.toString()
           + ", counter=" + itemModel.counter.toString());
