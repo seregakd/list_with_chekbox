@@ -33,10 +33,10 @@ class _HomePageState extends State<HomePage> {
   ItemModel itemModel;
 
   void _addItem() {
-    setState(() {
-      models.add(ItemModel(valueCb: _valueTitleCb,
-          itemText: "Item " + (_nameCounter++).toString(), counter: 0));
+    models.add(ItemModel(valueCb: _valueTitleCb,
+        itemText: "Item " + (_nameCounter++).toString(), counter: 0));
 
+    setState(() {
       widgets.add(ItemList(itemModel: models[models.length-1], listItemNumber: models.length-1,
           parentCount: refreshCount, parentCb: refreshCb));
     });
@@ -52,14 +52,16 @@ class _HomePageState extends State<HomePage> {
 
       if (itemModel.valueCb != value) {
         itemModel.valueCb = value;
+        models[i] = itemModel;
 
         setState(() {
-          models[i] = itemModel;
+          widgets[i] = ItemList(itemModel: models[i], listItemNumber: i,
+              parentCount: refreshCount, parentCb: refreshCb);
         });
       }
-      print("i = " + i.toString() + "itemText = " + itemModel.itemText
-          + " valueTitleCb = " + itemModel.valueCb.toString()
-          + " counter = " + itemModel.counter.toString());
+      print("i=" + i.toString() + ", Text=" + itemModel.itemText
+          + ", valueTitleCb=" + itemModel.valueCb.toString()
+          + ", counter=" + itemModel.counter.toString());
     }
 
   }
@@ -71,19 +73,25 @@ class _HomePageState extends State<HomePage> {
     if (childIncrement) {
       itemModel.counter++;
 
-      setState(() {
-        _allCount++;
-      });
+      if (itemModel.valueCb) {
+        setState(() {
+          _allCount++;
+        });
+      }
     } else {
       itemModel.counter--;
 
-      setState(() {
-        _allCount--;
-      });
+      if (!itemModel.valueCb) {
+        setState(() {
+          _allCount--;
+        });
+      }
     }
+    models[i] = itemModel;
 
     setState(() {
-      models[i] = itemModel;
+      widgets[i] = ItemList(itemModel: models[i], listItemNumber: i,
+          parentCount: refreshCount, parentCb: refreshCb);
     });
   }
 
@@ -91,9 +99,11 @@ class _HomePageState extends State<HomePage> {
     this.listItemNumber = i;
     itemModel = models[i];
     itemModel.valueCb = childCb;
+    models[i] = itemModel;
 
     setState(() {
-      models[i] = itemModel;
+      widgets[i] = ItemList(itemModel: models[i], listItemNumber: i,
+          parentCount: refreshCount, parentCb: refreshCb);
     });
 
     if (childCb) {
