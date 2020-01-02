@@ -24,9 +24,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _nameCounter = 0;
   int _allCount = 0;
-//  int counter = 0;
-  int listItemNumber = 0;
-//  List<String> _list = [];
   bool _valueTitleCb = false;
   List widgets = <Widget>[];
   List models = <ItemModel>[];
@@ -64,16 +61,10 @@ class _HomePageState extends State<HomePage> {
       if (itemModel.valueCb) {
         _allCount += itemModel.counter;
       }
-
-      print("i=" + i.toString() + ", Text=" + itemModel.itemText
-          + ", valueTitleCb=" + itemModel.valueCb.toString()
-          + ", counter=" + itemModel.counter.toString());
     }
-
   }
 
   void refreshCount(int i, bool childIncrement) {
-    this.listItemNumber = listItemNumber;
     itemModel = models[i];
 
     if (childIncrement) {
@@ -87,7 +78,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       itemModel.counter--;
 
-      if (!itemModel.valueCb) {
+      if (itemModel.valueCb) {
         setState(() {
           _allCount--;
         });
@@ -102,7 +93,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void refreshCb(int i, bool childCb) {
-    this.listItemNumber = i;
     itemModel = models[i];
     itemModel.valueCb = childCb;
     models[i] = itemModel;
@@ -153,18 +143,7 @@ class _HomePageState extends State<HomePage> {
         ]
     );
   }
-/*
-  Widget _buildList() {
-    return new ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemCount: _list.length,
-        itemBuilder: (context, i){
-          return ItemList(itemText: _list[i], valueTitleCb: _valueTitleCb,
-              parentCount: refreshAllCount, parentCb: refreshCb);
-        }
-    );
-  }
-*/
+
   Widget _buildList() {
     return new ListView.builder(
         padding: const EdgeInsets.all(16.0),

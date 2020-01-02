@@ -3,16 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'ItemModel.dart';
 
 class ItemList extends StatelessWidget  {
-//  final String itemText;
-//  final bool valueCb;
-//  final int counter;
   final ItemModel itemModel;
   final int listItemNumber;
   final Function parentCount;
   final Function parentCb;
-
-//  ItemList( {Key key, this.itemText, this.valueCb, this.counter,
-//    @required this.parentCount, @required this.parentCb}) :  super(key: key);
 
   ItemList({Key key, this.itemModel, this.listItemNumber,
     @required this.parentCount, @required this.parentCb}) :  super(key: key);
@@ -48,7 +42,7 @@ class ItemList extends StatelessWidget  {
             backgroundColor: Colors.lightBlueAccent,
             mini: true,
           ),
-          Text(itemModel.counter.toString()),  //, style: Theme.of(context).textTheme.title),
+          Text(itemModel.counter.toString()),
           FloatingActionButton(
             onPressed: () => _incrementCounter(true),
             child: const Icon(Icons.add),
