@@ -36,18 +36,32 @@ class ItemList extends StatelessWidget  {
     return Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          FloatingActionButton(
-            onPressed: () => _incrementCounter(false),
-            child: const Icon(Icons.remove),
-            backgroundColor: Colors.lightBlueAccent,
-            mini: true,
+          Ink(
+            decoration: const ShapeDecoration(
+              color: Colors.lightBlueAccent,
+              shape: CircleBorder(),
+            ),
+            child: IconButton(
+              icon: Icon(Icons.remove),
+              color: Colors.white,
+              iconSize: 20.0,
+              padding: EdgeInsets.all(10.0),
+              onPressed: () => _incrementCounter(false),
+            ),
           ),
           Text(itemModel.counter.toString()),
-          FloatingActionButton(
-            onPressed: () => _incrementCounter(true),
-            child: const Icon(Icons.add),
-            backgroundColor: Colors.lightBlueAccent,
-            mini: true,
+          Ink(
+            decoration: const ShapeDecoration(
+              color: Colors.lightBlueAccent,
+              shape: CircleBorder(),
+            ),
+            child: IconButton(
+              icon: Icon(Icons.add),
+              color: Colors.white,
+              iconSize: 20.0,
+              padding: EdgeInsets.all(10.0),
+              onPressed: () => _incrementCounter(true),
+            ),
           ),
     ]);
   }
