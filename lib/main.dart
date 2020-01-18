@@ -30,12 +30,12 @@ class _HomePageState extends State<HomePage> {
 
   void _addItem() {
     setState(() {
-      models.add(ItemModel(valueCb: _valueTitleCb,
+      models.add(ItemModel(valueCheckbox: _valueTitleCb,
           itemText: "Item " + (_nameCounter++).toString(), counter: 0));
     });
   }
 
-  void _valueTitleCbChanged(bool value) {
+  void _valueTitleCheckboxChanged(bool value) {
     setState(() {
       _valueTitleCb = value;
     });
@@ -44,15 +44,15 @@ class _HomePageState extends State<HomePage> {
     for (int i = 0; i < models.length; i++){
       itemModel = models[i];
 
-      if (itemModel.valueCb != value) {
-        itemModel.valueCb = value;
+      if (itemModel.valueCheckbox != value) {
+        itemModel.valueCheckbox = value;
 
         setState(() {
           models[i] = itemModel;
         });
       }
 
-      if (itemModel.valueCb) {
+      if (itemModel.valueCheckbox) {
         _allCount += itemModel.counter;
       }
     }
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
     if (childIncrement) {
       itemModel.counter++;
 
-      if (itemModel.valueCb) {
+      if (itemModel.valueCheckbox) {
         setState(() {
           _allCount++;
         });
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       itemModel.counter--;
 
-      if (itemModel.valueCb) {
+      if (itemModel.valueCheckbox) {
         setState(() {
           _allCount--;
         });
@@ -84,9 +84,9 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void refreshCb(int i, bool childCb) {
+  void refreshCheckbox(int i, bool childCb) {
     itemModel = models[i];
-    itemModel.valueCb = childCb;
+    itemModel.valueCheckbox = childCb;
 
     setState(() {
       models[i] = itemModel;
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(children: [
-            Checkbox(value: _valueTitleCb, onChanged: _valueTitleCbChanged),
+            Checkbox(value: _valueTitleCb, onChanged: _valueTitleCheckboxChanged),
             Text('Select all'),
           ]),
           Text(_allCount.toString()),
@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
         itemCount: models.length,
         itemBuilder: (context, i){
         return ItemList(itemModel: models[i], listItemNumber: i,
-          parentCount: refreshCount, parentCb: refreshCb);
+          parentCount: refreshCount, parentCb: refreshCheckbox);
         }
     );
   }

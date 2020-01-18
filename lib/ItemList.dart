@@ -25,7 +25,7 @@ class ItemList extends StatelessWidget  {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Checkbox(value: itemModel.valueCb, onChanged: _valueCbChanged),
+        Checkbox(value: itemModel.valueCheckbox, onChanged: _valueCbChanged),
         Text(itemModel.itemText),
         _buildCount(),
       ],
