@@ -25,17 +25,13 @@ class _HomePageState extends State<HomePage> {
   int _nameCounter = 0;
   int _allCount = 0;
   bool _valueTitleCb = false;
-  List widgets = <Widget>[];
   List models = <ItemModel>[];
   ItemModel itemModel;
 
   void _addItem() {
-    models.add(ItemModel(valueCb: _valueTitleCb,
-        itemText: "Item " + (_nameCounter++).toString(), counter: 0));
-
     setState(() {
-      widgets.add(ItemList(itemModel: models[models.length-1], listItemNumber: models.length-1,
-          parentCount: refreshCount, parentCb: refreshCb));
+      models.add(ItemModel(valueCb: _valueTitleCb,
+          itemText: "Item " + (_nameCounter++).toString(), counter: 0));
     });
   }
 
@@ -50,11 +46,9 @@ class _HomePageState extends State<HomePage> {
 
       if (itemModel.valueCb != value) {
         itemModel.valueCb = value;
-        models[i] = itemModel;
 
         setState(() {
-          widgets[i] = ItemList(itemModel: models[i], listItemNumber: i,
-              parentCount: refreshCount, parentCb: refreshCb);
+          models[i] = itemModel;
         });
       }
 
@@ -84,22 +78,18 @@ class _HomePageState extends State<HomePage> {
         });
       }
     }
-    models[i] = itemModel;
 
     setState(() {
-      widgets[i] = ItemList(itemModel: models[i], listItemNumber: i,
-          parentCount: refreshCount, parentCb: refreshCb);
+      models[i] = itemModel;
     });
   }
 
   void refreshCb(int i, bool childCb) {
     itemModel = models[i];
     itemModel.valueCb = childCb;
-    models[i] = itemModel;
 
     setState(() {
-      widgets[i] = ItemList(itemModel: models[i], listItemNumber: i,
-          parentCount: refreshCount, parentCb: refreshCb);
+      models[i] = itemModel;
     });
 
     if (childCb) {
@@ -147,9 +137,10 @@ class _HomePageState extends State<HomePage> {
   Widget _buildList() {
     return new ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemCount: widgets.length,
+        itemCount: models.length,
         itemBuilder: (context, i){
-          return widgets[i];
+        return ItemList(itemModel: models[i], listItemNumber: i,
+          parentCount: refreshCount, parentCb: refreshCb);
         }
     );
   }
